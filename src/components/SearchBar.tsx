@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     width: '100%',
     height: height * 0.08,
-    backgroundColor: colors.gray,
+    backgroundColor: colors.lightgray,
     borderRadius: 24,
     justifyContent: 'center',
     alignSelf: 'center',

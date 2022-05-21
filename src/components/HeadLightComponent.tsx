@@ -46,7 +46,7 @@ export const HeadLightComponent = () => {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          paddingHorizontal: Spacing,
+          paddingHorizontal: Spacing + 10,
         }}>
         <Text style={styles.descriptionText}>Mary Walton</Text>
         <Text style={styles.descriptionText}>5 min Reads</Text>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   headLightContainer: {
     height: height * 0.55,
     backgroundColor: 'red',
-    elevation: 15,
+    elevation: 8,
     borderRadius: 30,
   },
   headLightImageStyle: {
@@ -93,6 +93,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   descriptionText: {
-    color: colors.gray,
+    color: colors.lightgray,
   },
 });

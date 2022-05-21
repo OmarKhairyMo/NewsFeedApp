@@ -1,5 +1,7 @@
 import {
   Dimensions,
+  FlatList,
+  Image,
   ImageBackground,
   StyleSheet,
   Text,
@@ -11,6 +13,8 @@ import {fontSizeStyle} from '../theme/fontStyle';
 import {colors} from '../theme/colors';
 import {Spacing} from '../theme/layout';
 import {HeadLightComponent} from '../components/HeadLightComponent';
+import {NewsList} from '../utils/constants/DummyData';
+import NewsListComponent from '../components/NewsListComponent';
 
 const {height} = Dimensions.get('screen');
 export const Home = () => {
@@ -34,12 +38,21 @@ export const Home = () => {
           Explore the world by one Click
         </Text>
       </View> */}
-      <View style={styles.greetingContainer}>
-        <Text style={styles.greetingMessage}>Most Popular</Text>
-      </View>
-
-      {/* Most Popular New */}
-      <HeadLightComponent />
+      <FlatList
+        data={NewsList}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(_, index) => `${index}`}
+        renderItem={({item, index}) => <NewsListComponent item={item} />}
+        ListHeaderComponent={() => (
+          <>
+            <View style={styles.greetingContainer}>
+              <Text style={styles.greetingMessage}>Most Popular</Text>
+            </View>
+            <HeadLightComponent />
+            {/* Most Popular New */}
+          </>
+        )}
+      />
     </View>
   );
 };
