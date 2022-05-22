@@ -13,7 +13,11 @@ const {height, width} = Dimensions.get('screen');
 export const SearchBar: React.FC<SearchBarProps> = ({term}) => {
   return (
     <View style={styles.searchContainer}>
-      <TextInput style={styles.textInputStyle} placeholder="Search News" />
+      <TextInput
+        value={term}
+        style={styles.textInputStyle}
+        placeholder="Search News"
+      />
       <Icon name="search1" size={24} color={colors.black} />
     </View>
   );
@@ -21,7 +25,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({term}) => {
 
 const styles = StyleSheet.create({
   searchContainer: {
-    width: '100%',
     height: height * 0.08,
     backgroundColor: colors.lightgray,
     borderRadius: 24,

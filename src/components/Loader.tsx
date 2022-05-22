@@ -1,36 +1,34 @@
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {SearchBar} from './SearchBar';
+import {Dimensions, StyleSheet, View, ViewStyle} from 'react-native';
+import Animated from 'react-native-reanimated';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import {useTheme} from '@react-navigation/native';
+import {colors} from '../theme/colors';
+import {SearchBar} from './SearchBar';
 
+interface LoaderProps {
+  animatedHeaderStyle: ViewStyle;
+}
 const {height, width} = Dimensions.get('window');
 const skeltonItemsEstimation: number = Math.round((height * 0.8) / 160) - 1; // to estimate how much skeleton item could fit the phone screen
 const skeltonList: number[] = Array(skeltonItemsEstimation)
   .fill(null)
   .map((_, i) => i); // initialize sequenced array of the estimated length
 
-export const Loader = () => {
-  const {colors} = useTheme();
+export const Loader: React.FC<LoaderProps> = ({animatedHeaderStyle}) => {
   return (
-    <View
-      style={[styles.screenContainer, {backgroundColor: colors.background}]}>
-      <SearchBar term={'konafa'} />
+    <View style={[styles.screenContainer, {backgroundColor: colors.white}]}>
+      <Animated.View style={[styles.headerContainerStyle, animatedHeaderStyle]}>
+        <SearchBar term="konafa" />
+      </Animated.View>
       {/* Popular New */}
-      <SkeletonPlaceholder
-        speed={1000}
-        highlightColor={colors.text}
-        backgroundColor={colors.border}>
+      <SkeletonPlaceholder speed={1000} highlightColor={colors.gray}>
         <SkeletonPlaceholder.Item marginTop={100} marginBottom={18}>
           <View style={styles.skeletonBigCard} />
         </SkeletonPlaceholder.Item>
       </SkeletonPlaceholder>
       {/* List */}
       <View style={styles.marginContainer}>
-        <SkeletonPlaceholder
-          speed={1000}
-          highlightColor={colors.text}
-          backgroundColor={colors.border}>
+        <SkeletonPlaceholder speed={1000} highlightColor={colors.gray}>
           {skeltonList.map((item: number) => {
             return (
               <SkeletonPlaceholder.Item
@@ -54,7 +52,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     paddingHorizontal: 14,
   },
-
+  headerContainerStyle: {
+    top: 15,
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    width: width - 50,
+    alignSelf: 'center',
+    zIndex: 5,
+  },
   skeletonCard: {
     height: 160,
     width: width - width * 0.07,
