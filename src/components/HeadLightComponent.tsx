@@ -59,9 +59,8 @@ export const HeadLightComponent = () => {
 const styles = StyleSheet.create({
   headLightContainer: {
     height: height * 0.55,
-    backgroundColor: 'red',
-    elevation: 8,
     borderRadius: 30,
+    // elevation: 2,
   },
   headLightImageStyle: {
     width: '100%',

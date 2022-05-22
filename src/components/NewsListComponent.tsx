@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {SharedElement} from 'react-navigation-shared-element';
 import {MainTabParamList} from '../navigation/MainTabNavigator';
 import {NavigationKey} from '../navigation/NavigationKey';
@@ -16,10 +17,10 @@ import {RootStackParamList} from '../navigation/RootNavigator';
 import {colors} from '../theme/colors';
 import {fontSizeStyle} from '../theme/fontStyle';
 import {Spacing} from '../theme/layout';
-import {NewListDTO} from '../utils/constants/NewsListDTO';
+import {Article, NewListDTO} from '../utils/constants/NewsListDTO';
 
 interface NewListProps {
-  item: NewListDTO;
+  item: Article;
 }
 
 export type HomeScreenProps = CompositeNavigationProp<
@@ -49,9 +50,9 @@ const NewsListComponent: React.FC<NewListProps> = ({item}) => {
           height: '100%',
           borderRadius: 15,
         }}>
-        <SharedElement id={`${item.id}`}>
-          <Image
-            source={{uri: item.img}}
+        <SharedElement id={`${item.source.id}`}>
+          <FastImage
+            source={{uri: item.urlToImage}}
             style={{width: '100%', height: '100%', borderRadius: 15}}
           />
         </SharedElement>
@@ -73,8 +74,8 @@ const NewsListComponent: React.FC<NewListProps> = ({item}) => {
             justifyContent: 'space-between',
             marginTop: Spacing,
           }}>
-          <Text numberOfLines={3}>{item.readTime}</Text>
-          <Text numberOfLines={3}>{item.publishedDate}</Text>
+          <Text numberOfLines={3}></Text>
+          <Text numberOfLines={3}>{item.publishedAt}</Text>
         </View>
       </View>
     </TouchableOpacity>
