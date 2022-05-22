@@ -1,12 +1,17 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import {Details, Home} from './src/screens';
+import {
+  initialWindowMetrics,
+  SafeAreaProvider,
+} from 'react-native-safe-area-context';
+import RootNavigator from './src/navigation/RootNavigator';
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Details />
-    </View>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      <RootNavigator />
+    </SafeAreaProvider>
   );
 };
 

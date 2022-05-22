@@ -48,8 +48,11 @@ export const Home = () => {
             <View style={styles.greetingContainer}>
               <Text style={styles.greetingMessage}>Most Popular</Text>
             </View>
-            <HeadLightComponent />
             {/* Most Popular New */}
+            <HeadLightComponent />
+            <Text style={[styles.greetingMessage, {marginTop: Spacing}]}>
+              Top reads of the day
+            </Text>
           </>
         )}
       />
