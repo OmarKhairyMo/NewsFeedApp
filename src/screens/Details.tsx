@@ -49,23 +49,10 @@ export const Details = () => {
         </SharedElement>
         <ScrollView style={{paddingHorizontal: Spacing}}>
           {/* Header */}
-          <View
-            style={{
-              height: height * 0.1,
-              justifyContent: 'center',
-              paddingHorizontal: Spacing,
-            }}>
+          <View style={styles.headerContainer}>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 10,
-                elevation: 8,
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: colors.white,
-              }}>
+              style={styles.backButton}>
               <ArrowLeftIcon name="left" size={24} color={colors.black} />
             </TouchableOpacity>
           </View>
@@ -73,29 +60,14 @@ export const Details = () => {
           {/* Title Container */}
           <Text style={styles.titleStyle}>{currentNews.title}</Text>
           {/* Publisher Details */}
-          <View
-            style={{
-              width: '100%',
-              height: height * 0.08,
-              alignItems: 'center',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              borderBottomWidth: 2,
-              borderColor: colors.white,
-              paddingBottom: 10,
-              marginTop: 5,
-            }}>
+          <View style={styles.publisherDetailsContainer}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <View
-                style={{
-                  width: 50,
-                  height: 50,
-                }}>
+              <View style={styles.avatarContainer}>
                 <Image
                   source={{
                     uri: 'https://images.pexels.com/photos/2228570/pexels-photo-2228570.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
                   }}
-                  style={{width: '100%', height: '100%', borderRadius: 50}}
+                  style={styles.avatarImageStyle}
                 />
               </View>
               <View style={{marginLeft: Spacing}}>
@@ -136,9 +108,40 @@ export const Details = () => {
 
 const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: colors.black},
+  headerContainer: {
+    height: height * 0.1,
+    justifyContent: 'center',
+    paddingHorizontal: Spacing,
+  },
   titleStyle: {
     fontWeight: 'bold',
     fontSize: fontSizeStyle.title,
     color: colors.white,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    elevation: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+  },
+  publisherDetailsContainer: {
+    width: '100%',
+    height: height * 0.08,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 2,
+    borderColor: colors.white,
+    paddingBottom: 10,
+    marginTop: 5,
+  },
+  avatarContainer: {width: 50, height: 50},
+  avatarImageStyle: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 50,
   },
 });
