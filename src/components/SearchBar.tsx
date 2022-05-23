@@ -1,17 +1,17 @@
-import {Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
-import {Spacing} from '../theme/layout';
-import {fontSizeStyle} from '../theme/fontStyle';
-import {colors} from '../theme/colors';
-import STRINGS from '../utils/strings';
+import {Dimensions, StyleSheet, TextInput, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {colors} from '../theme/colors';
+import {fontSizeStyle} from '../theme/fontStyle';
+import {Spacing} from '../theme/layout';
+import STRINGS from '../utils/strings';
 
 interface SearchBarProps {
   term: string;
   onChangeText: (e: string) => void;
 }
 
-const {height, width} = Dimensions.get('screen');
+const {height} = Dimensions.get('screen');
 export const SearchBar: React.FC<SearchBarProps> = ({term, onChangeText}) => {
   return (
     <View style={styles.searchContainer}>

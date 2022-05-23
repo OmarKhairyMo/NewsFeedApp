@@ -12,7 +12,7 @@ import {fontSizeStyle} from '../theme/fontStyle';
 import {Spacing} from '../theme/layout';
 import API from '../utils/api/apis';
 import STRINGS from '../utils/strings';
-const {height, width} = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 
 const SEARCH_DEBOUNCE_DURATION: number = 400; //ms
 

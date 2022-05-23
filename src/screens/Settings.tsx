@@ -1,24 +1,15 @@
-import React, {useState} from 'react';
+// helpers import
+import {useTheme} from '@react-navigation/native';
+import React, {useCallback, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {EventRegister} from 'react-native-event-listeners';
 import {Switch} from 'react-native-switch';
-
+import RadioButton from '../components/RadioButton';
+import {changeLanguage} from '../utils/helpers';
 // styles import
 // import styles from './style'
-
 // strings import
 import STRINGS from '../utils/strings';
-
-// helpers import
-import {useTheme} from '@react-navigation/native';
-
-// components import
-// import RadioButton from '../../components/RadioButton';
-// import { changeLanguage } from '../../utils/helpers';
-import {useCallback} from 'react';
-import {colors} from '../theme/colors';
-import {changeLanguage} from '../utils/helpers';
-import RadioButton from '../components/RadioButton';
 
 const languageList = [
   {key: 1, title: STRINGS.t('english'), value: 'en'},
@@ -72,7 +63,6 @@ export const Settings = () => {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    // backgroundColor: colors.white,
     paddingHorizontal: 14,
   },
   darkmodeContainer: {

@@ -1,10 +1,7 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-
 import {NavigationKey} from '../navigation/NavigationKey';
-import {colors} from '../theme/colors';
-import {Spacing} from '../theme/layout';
 
 interface Props {
   focused: boolean;

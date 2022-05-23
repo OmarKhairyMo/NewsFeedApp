@@ -3,7 +3,6 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 import {
   Dimensions,
-  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -17,7 +16,7 @@ import {RootStackParamList} from '../navigation/RootNavigator';
 import {colors} from '../theme/colors';
 import {fontSizeStyle} from '../theme/fontStyle';
 import {Spacing} from '../theme/layout';
-import {Article, NewListDTO} from '../utils/constants/NewsListDTO';
+import {Article} from '../utils/constants/NewsListDTO';
 
 interface NewListProps {
   item: Article | any;
@@ -35,46 +34,20 @@ const NewsListComponent: React.FC<NewListProps> = ({item}) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(NavigationKey.Details, {item})}
-      style={{
-        padding: Spacing,
-        height: height * 0.15,
-        backgroundColor: colors.lightgray,
-        marginVertical: 15,
-        borderRadius: 20,
-        flexDirection: 'row',
-      }}>
+      style={styles.listContainer}>
       {/* Img Container */}
-      <View
-        style={{
-          width: '30%',
-          height: '100%',
-          borderRadius: 15,
-        }}>
+      <View style={styles.imgContainer}>
         <SharedElement id={`item.${item.source.id}.image`}>
-          <FastImage
-            source={{uri: item.urlToImage}}
-            style={{width: '100%', height: '100%', borderRadius: 15}}
-          />
+          <FastImage source={{uri: item.urlToImage}} style={styles.imgstyle} />
         </SharedElement>
       </View>
       {/* Text Container */}
       <View style={{flex: 1, paddingLeft: 15}}>
-        <Text
-          numberOfLines={3}
-          style={{
-            fontSize: fontSizeStyle.lg,
-            fontWeight: 'bold',
-            color: colors.black,
-          }}>
+        <Text numberOfLines={3} style={styles.textStyle}>
           {item.title}
         </Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginTop: Spacing,
-          }}>
-          <Text numberOfLines={3}></Text>
+        <View style={styles.marginContainer}>
+          {/* <Text numberOfLines={3}></Text> */}
           <Text numberOfLines={3}>{item.publishedAt}</Text>
         </View>
       </View>
@@ -84,4 +57,33 @@ const NewsListComponent: React.FC<NewListProps> = ({item}) => {
 
 export default NewsListComponent;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  listContainer: {
+    padding: Spacing,
+    height: height * 0.15,
+    backgroundColor: colors.lightgray,
+    marginVertical: 15,
+    borderRadius: 20,
+    flexDirection: 'row',
+  },
+  imgstyle: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 15,
+  },
+  imgContainer: {
+    width: '30%',
+    height: '100%',
+    borderRadius: 15,
+  },
+  textStyle: {
+    fontSize: fontSizeStyle.lg,
+    fontWeight: 'bold',
+    color: colors.black,
+  },
+  marginContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: Spacing,
+  },
+});
