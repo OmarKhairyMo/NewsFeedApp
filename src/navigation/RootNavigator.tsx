@@ -1,7 +1,12 @@
 import {NavigatorScreenParams} from '@react-navigation/core';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
+import {EventRegister} from 'react-native-event-listeners';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {Loader} from '../components/Loader';
 import {Details} from '../screens';
@@ -22,6 +27,32 @@ export const RootStack =
 
 const rootScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
+};
+
+const DarkMode = {
+  ...DarkTheme,
+  colors: {
+    primary: '#000',
+    background: '#000',
+    card: 'rgb(255, 255, 255)',
+    text: '#fff',
+    border: 'rgba(0,0,0,0.5)',
+    notification: 'rgb(255, 69, 58)',
+    inactiveTab: 'rgba(255,255,255,0.9)',
+  },
+};
+
+const LightMode = {
+  ...DefaultTheme,
+  colors: {
+    primary: '#fff',
+    background: '#fff',
+    card: 'rgb(255, 255, 255)',
+    text: '#000',
+    border: 'rgba(0,0,0,0.5)',
+    notification: 'rgb(255, 69, 58)',
+    inactiveTab: 'rgba(0,0,0,0.5)',
+  },
 };
 
 const RootNavigator: React.FC = () => {
@@ -63,8 +94,24 @@ const RootNavigator: React.FC = () => {
   );
 };
 
-export default () => (
-  <NavigationContainer>
-    <RootNavigator />
-  </NavigationContainer>
-);
+export default () => {
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  // device native event listner to trigger theme switching
+  useEffect(() => {
+    let eventListener: any = EventRegister.addEventListener(
+      'changeThemeEvent',
+      data => {
+        setDarkMode(data);
+      },
+    );
+    return () => {
+      EventRegister.removeEventListener(eventListener);
+    };
+  }, []);
+  return (
+    <NavigationContainer theme={darkMode ? DarkMode : LightMode}>
+      <RootNavigator />
+    </NavigationContainer>
+  );
+};

@@ -1,8 +1,9 @@
+import {useTheme} from '@react-navigation/native';
 import React from 'react';
 import {Dimensions, StyleSheet, View, ViewStyle} from 'react-native';
 import Animated from 'react-native-reanimated';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import {colors} from '../theme/colors';
+import {colors as appColors} from '../theme/colors';
 import {SearchBar} from './SearchBar';
 
 interface LoaderProps {
@@ -21,20 +22,22 @@ export const Loader: React.FC<LoaderProps> = ({
   onChangeText,
   searchTerm,
 }) => {
+  const {colors} = useTheme();
   return (
-    <View style={[styles.screenContainer, {backgroundColor: colors.white}]}>
+    <View
+      style={[styles.screenContainer, {backgroundColor: colors.background}]}>
       <Animated.View style={[styles.headerContainerStyle, animatedHeaderStyle]}>
         <SearchBar onChangeText={onChangeText} term={searchTerm} />
       </Animated.View>
       {/* Popular New */}
-      <SkeletonPlaceholder speed={1000} highlightColor={colors.gray}>
-        <SkeletonPlaceholder.Item marginTop={100} marginBottom={18}>
+      <SkeletonPlaceholder speed={1000} highlightColor={appColors.gray}>
+        <SkeletonPlaceholder.Item marginTop={200} marginBottom={18}>
           <View style={styles.skeletonBigCard} />
         </SkeletonPlaceholder.Item>
       </SkeletonPlaceholder>
       {/* List */}
       <View style={styles.marginContainer}>
-        <SkeletonPlaceholder speed={1000} highlightColor={colors.gray}>
+        <SkeletonPlaceholder speed={1000} highlightColor={appColors.gray}>
           {skeltonList.map((item: number) => {
             return (
               <SkeletonPlaceholder.Item
@@ -55,7 +58,6 @@ export const Loader: React.FC<LoaderProps> = ({
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    backgroundColor: 'black',
     paddingHorizontal: 14,
   },
   headerContainerStyle: {
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     zIndex: 5,
   },
   skeletonCard: {
-    height: 120,
+    height: 110,
     width: width - width * 0.07,
     borderRadius: 14,
   },

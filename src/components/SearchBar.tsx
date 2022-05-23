@@ -3,6 +3,7 @@ import React from 'react';
 import {Spacing} from '../theme/layout';
 import {fontSizeStyle} from '../theme/fontStyle';
 import {colors} from '../theme/colors';
+import STRINGS from '../utils/strings';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 interface SearchBarProps {
@@ -18,7 +19,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({term, onChangeText}) => {
         value={term}
         onChangeText={onChangeText}
         style={styles.textInputStyle}
-        placeholder="Search News"
+        placeholder={STRINGS.t('search')}
       />
       <Icon name="search1" size={24} color={colors.black} />
     </View>

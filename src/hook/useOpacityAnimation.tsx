@@ -10,7 +10,6 @@ export default (minHeight: number, maxHeight: number) => {
   const translationY = useSharedValue<number>(0);
 
   const scrollHandler = useAnimatedScrollHandler(event => {
-    console.log(event.contentOffset.y);
     translationY.value = event.contentOffset.y;
   });
 

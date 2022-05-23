@@ -2,7 +2,7 @@ import {
   BottomTabScreenProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {CompositeScreenProps} from '@react-navigation/native';
+import {CompositeScreenProps, useTheme} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StyleSheet} from 'react-native';
 import {TabIcon} from '../components/TabIcon';
@@ -19,7 +19,7 @@ export type MainTabParamList = {
 };
 
 //if we need to take navigation prop and use it in this componennt
-type MainTabScreenProps = CompositeScreenProps<
+export type MainTabScreenProps = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamList, NavigationKey.MainTabNavigator>,
   BottomTabScreenProps<MainTabParamList>
 >;
@@ -27,6 +27,7 @@ type MainTabScreenProps = CompositeScreenProps<
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
 export const MainTabNavigator: React.FC<MainTabScreenProps> = () => {
+  const {colors} = useTheme();
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -34,8 +35,9 @@ export const MainTabNavigator: React.FC<MainTabScreenProps> = () => {
         headerShown: false,
 
         tabBarIcon: props => <TabIcon {...props} route={route} />,
-        tabBarActiveTintColor: colors.black,
-        tabBarStyle: styles.tabBar,
+        tabBarActiveTintColor: colors.background,
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: [styles.tabBar, {backgroundColor: colors.text}],
       })}
       initialRouteName={NavigationKey.Home}>
       <Tab.Screen name={NavigationKey.Home} component={Home} />

@@ -1,0 +1,19 @@
+{
+    "newsScreen": "ألأخبار",
+    "search": "بحث الاخبار",
+    "noResult": "لا يوجد نتائج",
+    "retry": "إعادة محاولة",
+    "settings": "الإعدادات",
+    "language": "إلغة",
+    "english": "English",
+    "arabic": "عربي",
+    "warning": "تحذير",
+    "languageWarningBody": "سيؤدي تغيير اللغة إلى إعادة تشغيل التطبيق",
+    "cancel": "إلغاء",
+    "ok": "موافق",
+    "darkMode": "نمط التطبيق",
+    "details": "التفصيل",
+    "mostPopular": "الاكثر انتشار",
+    "topReadsOfTheDay": "الاكثر قراءه اليوم"
+
+}

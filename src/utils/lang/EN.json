@@ -1,0 +1,18 @@
+{
+    "newsScreen": "News",
+    "search": "Search News",
+    "noResult": "No Result Found",
+    "retry": "Retry",
+    "settings": "Settings",
+    "language": "Language",
+    "english": "English",
+    "arabic": "عربي",
+    "warning": "Warning",
+    "languageWarningBody": "Changing language will restart the app",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "darkMode": "Dark mode",
+    "details": "Details",
+    "mostPopular": "Most Popular",
+    "topReadsOfTheDay": "Top reads of the day"
+}

@@ -11,6 +11,7 @@ import useOpacityAnimation from '../hook/useOpacityAnimation';
 import {fontSizeStyle} from '../theme/fontStyle';
 import {Spacing} from '../theme/layout';
 import API from '../utils/api/apis';
+import STRINGS from '../utils/strings';
 const {height, width} = Dimensions.get('screen');
 
 const SEARCH_DEBOUNCE_DURATION: number = 400; //ms
@@ -90,12 +91,14 @@ export const Home = () => {
         ListHeaderComponent={() => (
           <View style={{paddingTop: 100}}>
             <View style={styles.greetingContainer}>
-              <Text style={styles.greetingMessage}>Most Popular</Text>
+              <Text style={styles.greetingMessage}>
+                {STRINGS.t('mostPopular')}
+              </Text>
             </View>
             {/* Most Popular New */}
             <HeadLightComponent />
             <Text style={[styles.greetingMessage, {marginTop: Spacing}]}>
-              Top reads of the day
+              {STRINGS.t('topReadsOfTheDay')}
             </Text>
           </View>
         )}
