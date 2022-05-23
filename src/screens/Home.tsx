@@ -13,21 +13,26 @@ import {Spacing} from '../theme/layout';
 import API from '../utils/api/apis';
 const {height, width} = Dimensions.get('screen');
 
+const SEARCH_DEBOUNCE_DURATION: number = 400; //ms
+
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList); // creating Animated FlatList
 export const Home = () => {
   const [newsList, setNewsList] = useState(); // the News List
   const [isLoading, setLoading] = useState(true); // handle waiting while Loading
   const [error, setError] = useState(false); // handle Bad Requests
   const [isRefershing, setRefreshing] = useState(false); // handle Bad Requests
+  const [term, setTerm] = useState<string>(''); // handle Search keywords
   const {animatedHeaderStyle, scrollHandler} = useOpacityAnimation(0, 200);
-  console.log(isLoading, 'Loadinggg');
   // Handle Fetching News
-
-  const fetchNews = async () => {
+  const fetchNews = async (term: string) => {
     setLoading(true);
     setError(false);
     try {
-      const data = await axios.get(API.FETCH_NEWS);
+      const data = await axios.get(API.FETCH_NEWS, {
+        params: {
+          q: term,
+        },
+      });
       setNewsList(data.data.articles);
     } catch (error) {
       setError(true);
@@ -35,27 +40,44 @@ export const Home = () => {
       setLoading(false);
     }
   };
+  // side effect to fetch data on mount and when the user stop typing for 400 ms
   useEffect(() => {
-    fetchNews();
-  }, []);
+    if (term) {
+      const searchDebounce = setTimeout(() => {
+        fetchNews(term);
+      }, SEARCH_DEBOUNCE_DURATION);
+
+      return () => clearTimeout(searchDebounce);
+    } else {
+      fetchNews(term);
+    }
+  }, [term]);
 
   const onRefresh = async () => {
     setRefreshing(true);
-    fetchNews();
+    fetchNews(term);
     setRefreshing(false);
   };
 
   if (isLoading) {
-    return <Loader animatedHeaderStyle={animatedHeaderStyle} />;
+    return (
+      <Loader
+        searchTerm={term}
+        onChangeText={e => setTerm(e)}
+        animatedHeaderStyle={animatedHeaderStyle}
+      />
+    );
   }
   if (error) {
-    return <ErrorScreen isLoading={isLoading} onPress={fetchNews} />;
+    return (
+      <ErrorScreen isLoading={isLoading} onPress={() => fetchNews(term)} />
+    );
   }
   return (
     <View style={styles.container}>
       {/* Header */}
       <Animated.View style={[styles.headerContainerStyle, animatedHeaderStyle]}>
-        <SearchBar term="konafa" />
+        <SearchBar onChangeText={e => setTerm(e)} term={term} />
       </Animated.View>
       <AnimatedFlatList
         onRefresh={onRefresh}

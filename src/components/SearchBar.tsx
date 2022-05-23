@@ -7,14 +7,16 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 interface SearchBarProps {
   term: string;
+  onChangeText: (e: string) => void;
 }
 
 const {height, width} = Dimensions.get('screen');
-export const SearchBar: React.FC<SearchBarProps> = ({term}) => {
+export const SearchBar: React.FC<SearchBarProps> = ({term, onChangeText}) => {
   return (
     <View style={styles.searchContainer}>
       <TextInput
         value={term}
+        onChangeText={onChangeText}
         style={styles.textInputStyle}
         placeholder="Search News"
       />

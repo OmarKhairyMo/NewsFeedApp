@@ -1,22 +1,19 @@
 import {NavigatorScreenParams} from '@react-navigation/core';
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  createNativeStackNavigator,
-  NativeStackNavigationOptions,
-} from '@react-navigation/native-stack';
-import {useMemo, useState} from 'react';
+import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
+import React, {useMemo, useState} from 'react';
+import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {Loader} from '../components/Loader';
 import {Details} from '../screens';
+import {Article} from '../utils/constants/NewsListDTO';
 import {MainTabNavigator, MainTabParamList} from './MainTabNavigator';
 import {NavigationKey} from './NavigationKey';
-import React from 'react';
-import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 
 export type DetailsScreenRoot = {};
 export type RootStackParamList = {
   [NavigationKey.MainTabNavigator]: NavigatorScreenParams<MainTabParamList>;
   [NavigationKey.Settings]: undefined;
-  [NavigationKey.Details]: undefined;
+  [NavigationKey.Details]: {item: Article};
   [NavigationKey.Loading]: undefined;
 };
 
@@ -45,7 +42,12 @@ const RootNavigator: React.FC = () => {
         />
         <RootStack.Screen
           sharedElements={route => {
-            return [{id: `${route.params.item.id}`, animation: 'fade'}];
+            return [
+              {
+                id: `item.${route.params.item.source.id}.image`,
+                animation: 'fade-out',
+              },
+            ];
           }}
           name={NavigationKey.Details}
           component={Details}

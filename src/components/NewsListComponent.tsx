@@ -20,7 +20,7 @@ import {Spacing} from '../theme/layout';
 import {Article, NewListDTO} from '../utils/constants/NewsListDTO';
 
 interface NewListProps {
-  item: Article;
+  item: Article | any;
 }
 
 export type HomeScreenProps = CompositeNavigationProp<
@@ -50,7 +50,7 @@ const NewsListComponent: React.FC<NewListProps> = ({item}) => {
           height: '100%',
           borderRadius: 15,
         }}>
-        <SharedElement id={`${item.source.id}`}>
+        <SharedElement id={`item.${item.source.id}.image`}>
           <FastImage
             source={{uri: item.urlToImage}}
             style={{width: '100%', height: '100%', borderRadius: 15}}
